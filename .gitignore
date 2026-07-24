@@ -19,6 +19,13 @@ reports/*.json
 reports/*.html
 reports/*.csv
 
+# Keep the small precomputed artifacts the dashboard reads, so it runs on a fresh
+# clone and on Streamlit Cloud without first running the training pipeline.
+!reports/comparison.json
+!reports/risk_metrics.json
+!reports/drift_metrics.json
+!reports/risk_examples.csv
+
 # Tooling
 .pytest_cache/
 .ruff_cache/

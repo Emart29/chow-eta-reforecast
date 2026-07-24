@@ -1,0 +1,119 @@
+{
+  "regime": {
+    "reference": {
+      "rain_prob": 0.18,
+      "congestion_scale": 1.0
+    },
+    "current": {
+      "rain_prob": 0.55,
+      "congestion_scale": 1.35
+    }
+  },
+  "drift": {
+    "overall": {
+      "drifted_columns": 5,
+      "drifted_share": 0.25
+    },
+    "columns": {
+      "distance_km": {
+        "p_value": 0.013068906546042492,
+        "drifted": true
+      },
+      "restaurant_prep_estimate": {
+        "p_value": 0.012403735073682405,
+        "drifted": true
+      },
+      "hour_of_day": {
+        "p_value": 0.009919209875511672,
+        "drifted": true
+      },
+      "rider_available_count_nearby": {
+        "p_value": 0.20828714094485748,
+        "drifted": false
+      },
+      "zone_congestion": {
+        "p_value": 0.00816892420219324,
+        "drifted": true
+      },
+      "restaurant_hist_prep": {
+        "p_value": 0.019388186783965537,
+        "drifted": true
+      },
+      "zone_hour_hist_delivery": {
+        "p_value": 0.009110934386647056,
+        "drifted": true
+      },
+      "expected_to_customer_min": {
+        "p_value": 0.11727571427209116,
+        "drifted": false
+      },
+      "predicted_eta": {
+        "p_value": 0.18207367341736225,
+        "drifted": false
+      },
+      "actual_delivery_min": {
+        "p_value": 0.1925160395662876,
+        "drifted": false
+      },
+      "day_of_week": {
+        "p_value": 0.01578542325269133,
+        "drifted": true
+      },
+      "is_weekend": {
+        "p_value": 0.00619869016004562,
+        "drifted": true
+      },
+      "is_peak": {
+        "p_value": 0.00017772039465707097,
+        "drifted": true
+      },
+      "weather_rain": {
+        "p_value": 0.28262646534178143,
+        "drifted": false
+      },
+      "restaurant_high_volume": {
+        "p_value": 0.0004918261799741732,
+        "drifted": true
+      },
+      "zone_Yaba": {
+        "p_value": 0.0005707061144413949,
+        "drifted": true
+      },
+      "zone_Surulere": {
+        "p_value": 0.0012885492727492428,
+        "drifted": true
+      },
+      "zone_Ikeja": {
+        "p_value": 0.006007341539589876,
+        "drifted": true
+      },
+      "zone_Lekki": {
+        "p_value": 0.00017792031740176053,
+        "drifted": true
+      },
+      "zone_VI": {
+        "p_value": 0.006825257065416509,
+        "drifted": true
+      }
+    }
+  },
+  "performance": {
+    "reference": {
+      "mae": 9.761522086270649,
+      "rmse": 13.987706677667289,
+      "p50_abs_error": 6.81277503967285,
+      "p90_abs_error": 21.844494674682615,
+      "mean_bias": -1.016077992661794,
+      "silent_overrun_rate": 0.17875
+    },
+    "current": {
+      "mae": 10.884996866442362,
+      "rmse": 15.654842679393074,
+      "p50_abs_error": 7.560346298217773,
+      "p90_abs_error": 24.354400436401367,
+      "mean_bias": -2.3579071016375224,
+      "silent_overrun_rate": 0.22175
+    }
+  },
+  "n_orders": 12000
+}

@@ -1,0 +1,22 @@
+{
+  "prevalence": 0.17025,
+  "threshold": 0.6006358861923218,
+  "pr_auc": 0.4383721889638773,
+  "roc_auc": 0.6901048959866634,
+  "learned_model": {
+    "precision": 0.38095238095238093,
+    "recall": 0.3406754772393539,
+    "flagged_share": 0.15225
+  },
+  "learned_model_matched_budget": {
+    "precision": 0.6948356807511737,
+    "recall": 0.2173274596182085,
+    "flagged_share": 0.05325
+  },
+  "rule_baseline": {
+    "precision": 0.7136150234741784,
+    "recall": 0.22320117474302498,
+    "flagged_share": 0.05325
+  },
+  "n_test": 4000
+}

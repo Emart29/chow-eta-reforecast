@@ -1,0 +1,108 @@
+{
+  "static_silent_overrun": 0.172,
+  "static_mae": 10.042192454013824,
+  "dynamic_per_checkpoint": {
+    "order_placed": {
+      "mae": 10.102244779834747,
+      "rmse": 14.453066112184668,
+      "p50_abs_error": 7.09117317199707,
+      "p90_abs_error": 22.462719726562504,
+      "mean_bias": -0.2062592452812194,
+      "silent_overrun_rate": 0.17025,
+      "n": 4000
+    },
+    "rider_assigned": {
+      "mae": 8.702742337856293,
+      "rmse": 12.471969989625642,
+      "p50_abs_error": 6.022958946228027,
+      "p90_abs_error": 18.951911285400392,
+      "mean_bias": -0.06563288068771363,
+      "silent_overrun_rate": 0.1465,
+      "n": 4000
+    },
+    "pickup_confirmed": {
+      "mae": 2.0079169293778762,
+      "rmse": 2.806383030647607,
+      "p50_abs_error": 1.4379409742355342,
+      "p90_abs_error": 4.420496803283699,
+      "mean_bias": 0.021722775903381387,
+      "silent_overrun_rate": 0.00475,
+      "n": 4000
+    },
+    "enroute_midpoint": {
+      "mae": 1.0517154022580828,
+      "rmse": 1.4955693088119466,
+      "p50_abs_error": 0.7610209250450151,
+      "p90_abs_error": 2.296424238204955,
+      "mean_bias": 0.08859113499040948,
+      "silent_overrun_rate": 0.00025,
+      "n": 4000
+    }
+  },
+  "segment_breakdown": {
+    "all orders": {
+      "n": 4000,
+      "static": 0.172,
+      "dynamic_at_pickup": 0.00475
+    },
+    "zone: Yaba": {
+      "n": 822,
+      "static": 0.1386861313868613,
+      "dynamic_at_pickup": 0.0024330900243309003
+    },
+    "zone: Surulere": {
+      "n": 837,
+      "static": 0.16009557945041816,
+      "dynamic_at_pickup": 0.0011947431302270011
+    },
+    "zone: Ikeja": {
+      "n": 1166,
+      "static": 0.20154373927958832,
+      "dynamic_at_pickup": 0.005145797598627788
+    },
+    "zone: Lekki": {
+      "n": 524,
+      "static": 0.1984732824427481,
+      "dynamic_at_pickup": 0.007633587786259542
+    },
+    "zone: VI": {
+      "n": 651,
+      "static": 0.15514592933947774,
+      "dynamic_at_pickup": 0.009216589861751152
+    },
+    "peak hours": {
+      "n": 2202,
+      "static": 0.184377838328792,
+      "dynamic_at_pickup": 0.004087193460490463
+    },
+    "off-peak": {
+      "n": 1798,
+      "static": 0.1568409343715239,
+      "dynamic_at_pickup": 0.0055617352614015575
+    },
+    "compounding delay": {
+      "n": 680,
+      "static": 0.2514705882352941,
+      "dynamic_at_pickup": 0.004411764705882353
+    },
+    "normal orders": {
+      "n": 3320,
+      "static": 0.15572289156626506,
+      "dynamic_at_pickup": 0.004819277108433735
+    }
+  },
+  "shap_top_features": {
+    "picked_up": 11.032999992370605,
+    "expected_to_customer_min": 2.5920000076293945,
+    "event_offset_min": 2.2679998874664307,
+    "restaurant_hist_prep": 2.2279999256134033,
+    "enroute": 1.3309999704360962,
+    "obs_assignment_delay_min": 1.2730000019073486,
+    "distance_km": 1.027999997138977,
+    "obs_actual_prep_min": 0.8510000109672546,
+    "zone_hour_hist_delivery": 0.6460000276565552,
+    "rider_available_count_nearby": 0.4699999988079071,
+    "restaurant_prep_estimate": 0.43799999356269836,
+    "weather_rain": 0.30300000309944153
+  }
+}
