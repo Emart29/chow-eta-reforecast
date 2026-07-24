@@ -10,14 +10,12 @@ ENV PYTHONUNBUFFERED=1 \
 COPY requirements-api.txt .
 RUN pip install --no-cache-dir -r requirements-api.txt
 
-# Application code.
+# Application code and the pre-trained serving bundle. The bundle is trained
+# offline and committed, so the image needs no training step at build time
+# (training on a small cloud instance is slow and needs the full ML stack).
 COPY src ./src
 COPY api ./api
-
-# Simulate data and train the serving bundle at build time, so the container
-# starts ready to serve without a separate training step.
-RUN python -m src.simulate.lifecycle --n-orders 20000 \
- && python -c "from src.serving.bundle import build_and_save; build_and_save()"
+COPY models/serving_bundle.joblib ./models/serving_bundle.joblib
 
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \

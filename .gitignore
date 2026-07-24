@@ -14,6 +14,8 @@ data/*.parquet
 data/*.csv
 models/*.pkl
 models/*.joblib
+# Except the serving bundle, committed so the API image deploys without training.
+!models/serving_bundle.joblib
 reports/figures/*.png
 reports/*.json
 reports/*.html

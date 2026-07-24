@@ -1,9 +1,11 @@
 # Runtime dependencies for the serving API only (leaner than the full stack).
+# xgboost and scikit-learn are pinned to the versions the committed serving
+# bundle was trained with, so the pickled models load without a version warning.
 numpy>=1.26
 pandas>=2.1
 pyarrow>=15.0
-scikit-learn>=1.4
-xgboost>=2.0
+scikit-learn==1.9.0
+xgboost==3.2.0
 joblib>=1.3
 fastapi>=0.110
 uvicorn[standard]>=0.29

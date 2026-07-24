@@ -8,6 +8,7 @@ __pycache__
 .ruff_cache
 data/*.parquet
 models/*.joblib
+!models/serving_bundle.joblib
 reports/*.html
 reports/figures/*.png
 notebooks

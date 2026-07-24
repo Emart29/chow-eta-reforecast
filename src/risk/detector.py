@@ -155,7 +155,6 @@ def train(dataset: Dataset | None = None) -> tuple[XGBClassifier, dict, pd.DataF
         "rule_baseline": _operating_point(y_test, rule_flags),
         "n_test": len(y_test),
     }
-    _plot_pr_curve(y_test, scores, metrics["rule_baseline"])
 
     test_frame = test_frame.assign(risk_score=scores, flagged=model_flags)
     return model, metrics, test_frame
@@ -235,6 +234,11 @@ def main() -> None:
         json.dump(metrics, fh, indent=2)
     examples = _example_notifications(test_frame)
     examples.to_csv(EXAMPLES_PATH, index=False)
+    _plot_pr_curve(
+        test_frame["silent_overrun"].to_numpy(),
+        test_frame["risk_score"].to_numpy(),
+        metrics["rule_baseline"],
+    )
 
     _print_metrics(metrics)
     print(f"\nsaved model    -> {MODEL_PATH}")
