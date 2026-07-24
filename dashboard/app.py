@@ -186,18 +186,18 @@ def main() -> None:
     left, right = st.columns(2)
     with left:
         st.subheader("Silent overruns collapse as the ETA is re-forecast")
-        st.altair_chart(_stage_chart(comparison), use_container_width=True)
+        st.altair_chart(_stage_chart(comparison), width="stretch")
     with right:
         st.subheader("Accuracy improves at each checkpoint")
-        st.altair_chart(_mae_chart(comparison), use_container_width=True)
+        st.altair_chart(_mae_chart(comparison), width="stretch")
 
     st.subheader("Before / after by segment")
-    st.altair_chart(_segment_chart(comparison), use_container_width=False)
+    st.altair_chart(_segment_chart(comparison), width="content")
 
     left2, right2 = st.columns([3, 2])
     with left2:
         st.subheader("What drives the re-forecast")
-        st.altair_chart(_shap_chart(comparison), use_container_width=True)
+        st.altair_chart(_shap_chart(comparison), width="stretch")
     with right2:
         st.subheader("Risk detector at rider assignment")
         lm = risk["learned_model"]
