@@ -1,0 +1,7 @@
+# Normalize line endings to LF in the repository across platforms.
+* text=auto eol=lf
+
+# Treat generated binaries correctly.
+*.png binary
+*.parquet binary
+*.joblib binary
