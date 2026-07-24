@@ -149,7 +149,7 @@ docker run -p 8000:8000 chow-eta-reforecast
 
 ## Live demo
 
-- Dashboard: *add your Streamlit Cloud URL*
+- **Dashboard:** <https://chow-eta-reforecast.streamlit.app/>
 - API docs: *add your Render URL* `/docs`
 
 ## Project structure
