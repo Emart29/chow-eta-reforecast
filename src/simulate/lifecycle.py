@@ -51,20 +51,21 @@ def _travel_minutes(distance_km: np.ndarray, congestion: np.ndarray, rain: np.nd
 # Lifecycle simulation
 # --------------------------------------------------------------------------- #
 def simulate_lifecycle(
-    orders: pd.DataFrame, seed: int | None = None
+    orders: pd.DataFrame, seed: int | None = None, congestion_scale: float = 1.0
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Advance every order through its lifecycle and return (orders, events).
 
     ``orders`` is the enriched order table with all timing components and the
     final delivery time; ``events`` is the long-format checkpoint stream. The
-    result is deterministic for a given ``(orders, seed)``.
+    result is deterministic for a given ``(orders, seed)``. ``congestion_scale``
+    multiplies zone congestion to simulate a heavier-traffic regime.
     """
     rng = np.random.default_rng(config.SEED if seed is None else seed)
     n = len(orders)
     d = config.DELAY
 
     zone_lookup = {z.name: z for z in config.ZONES}
-    congestion = orders["traffic_zone"].map(lambda z: zone_lookup[z].congestion).to_numpy()
+    congestion = orders["traffic_zone"].map(lambda z: zone_lookup[z].congestion).to_numpy() * congestion_scale
     density = orders["traffic_zone"].map(lambda z: zone_lookup[z].rider_density).to_numpy()
 
     is_peak = orders["is_peak"].to_numpy()

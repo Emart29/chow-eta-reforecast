@@ -168,6 +168,7 @@ def main() -> None:
     comparison = _load_json(config.REPORTS_DIR / "comparison.json")
     risk = _load_json(config.REPORTS_DIR / "risk_metrics.json")
     examples = _load_csv(config.REPORTS_DIR / "risk_examples.csv")
+    drift = _load_json(config.REPORTS_DIR / "drift_metrics.json")
     if not _require(comparison, risk):
         return
 
@@ -205,6 +206,32 @@ def main() -> None:
         st.caption(
             f"Flags {lm['flagged_share']:.0%} of orders at assignment, the earliest "
             "point the realised assignment delay is known."
+        )
+
+    if drift is not None:
+        st.divider()
+        st.subheader("📉 Model monitoring — data drift")
+        st.caption(
+            "A reference period from the normal regime versus a current period from a "
+            "wetter, more congested 'rainy season'. Evidently flags the input shift; the "
+            "production model, unaware of it, degrades."
+        )
+        overall = drift["drift"]["overall"]
+        ref_perf, cur_perf = drift["performance"]["reference"], drift["performance"]["current"]
+        d1, d2, d3 = st.columns(3)
+        d1.metric("Drifted columns", f"{overall['drifted_columns']} ({overall['drifted_share']:.0%})")
+        d2.metric(
+            "Placement MAE", f"{cur_perf['mae']:.1f} min",
+            f"+{cur_perf['mae'] - ref_perf['mae']:.1f}", delta_color="inverse",
+        )
+        d3.metric(
+            "Silent-overrun rate", f"{cur_perf['silent_overrun_rate']:.1%}",
+            f"+{cur_perf['silent_overrun_rate'] - ref_perf['silent_overrun_rate']:.1%}",
+            delta_color="inverse",
+        )
+        st.caption(
+            "Full Evidently report saved to `reports/drift_report.html` "
+            "(regenerate with `python -m src.monitoring.drift`)."
         )
 
     st.divider()

@@ -148,14 +148,20 @@ def _sample_placed_at(rng: np.random.Generator, n: int, days: int) -> pd.Series:
 # --------------------------------------------------------------------------- #
 # Order generation
 # --------------------------------------------------------------------------- #
-def generate_orders(n_orders: int, days: int = 30, seed: int | None = None) -> pd.DataFrame:
+def generate_orders(
+    n_orders: int, days: int = 30, seed: int | None = None, rain_prob: float | None = None
+) -> pd.DataFrame:
     """Generate ``n_orders`` orders with every field known at placement time.
 
     Returns a flat DataFrame. The result is deterministic for a given
-    ``(n_orders, days, seed)`` combination.
+    ``(n_orders, days, seed)`` combination. ``rain_prob`` overrides the baseline
+    rain rate, which is used to simulate a wetter environmental regime.
     """
     rng = np.random.default_rng(config.SEED if seed is None else seed)
-    restaurants = build_restaurants(rng)
+    rain_prob = config.RAIN_PROB if rain_prob is None else rain_prob
+    # Restaurants come from their own fixed seed so their identity and history are
+    # stable across order samples; only the orders themselves vary with ``seed``.
+    restaurants = build_restaurants(np.random.default_rng(config.RESTAURANT_SEED))
 
     # Choose a restaurant per order, weighted by popularity.
     rest_p = restaurants["popularity"].to_numpy()
@@ -187,7 +193,7 @@ def generate_orders(n_orders: int, days: int = 30, seed: int | None = None) -> p
     )
 
     # An independent rain draw per order keeps this field observable at placement.
-    weather_rain = rng.random(n_orders) < config.RAIN_PROB
+    weather_rain = rng.random(n_orders) < rain_prob
 
     # Nearby rider supply falls from a zone baseline during peaks and in the rain.
     zone_density = chosen["restaurant_zone"].map(lambda z: zone_lookup[z].rider_density).to_numpy()

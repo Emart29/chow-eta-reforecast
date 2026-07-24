@@ -16,6 +16,8 @@ models/*.pkl
 models/*.joblib
 reports/figures/*.png
 reports/*.json
+reports/*.html
+reports/*.csv
 
 # Tooling
 .pytest_cache/

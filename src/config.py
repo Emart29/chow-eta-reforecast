@@ -25,6 +25,10 @@ EVENTS_PATH = DATA_DIR / "events.parquet"
 # Reproducibility
 # --------------------------------------------------------------------------- #
 SEED = 42
+# The restaurant population is a stable entity, generated from its own fixed seed
+# so that a restaurant's identity and history are consistent across order samples
+# drawn with different seeds (training, reference, and drift regimes alike).
+RESTAURANT_SEED = 7
 
 # --------------------------------------------------------------------------- #
 # Lagos geography — real neighbourhoods for credibility.
