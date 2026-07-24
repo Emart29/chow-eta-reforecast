@@ -56,7 +56,7 @@ to hour-plus waits — are exactly where a static ETA fails most and re-forecast
 | Segment | Static | Dynamic (at pickup) |
 | --- | --- | --- |
 | All orders | 17.2% | 0.5% |
-| Peak hours | ~18% | ~0.6% |
+| Peak hours | 18.4% | 0.4% |
 | **Compounding delays** | **25.1%** | **0.4%** |
 
 ![Silent-overrun rate by zone](assets/overrun_by_zone.png)
