@@ -168,3 +168,17 @@ NON_FEATURE_COLUMNS = ["order_id", "checkpoint", "checkpoint_index", "remaining_
 def feature_columns(table: pd.DataFrame) -> list[str]:
     """Return the model-input columns of a feature table built by :class:`FeatureBuilder`."""
     return [c for c in table.columns if c not in NON_FEATURE_COLUMNS]
+
+
+# Columns that carry no information at order placement: they are either observed
+# lifecycle measurements (missing at checkpoint 0) or progress markers that are
+# constant there. The static model is restricted to the remaining placement-time
+# columns so it depends only on what is known when the order is created.
+def placement_feature_columns(table: pd.DataFrame) -> list[str]:
+    """Return the feature columns observable at order placement (checkpoint 0)."""
+    excluded = {"event_offset_min", "picked_up", "enroute"}
+    return [
+        c
+        for c in feature_columns(table)
+        if c not in excluded and not c.startswith("obs_")
+    ]
