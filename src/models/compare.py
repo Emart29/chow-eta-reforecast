@@ -193,37 +193,6 @@ def _fig_shap_global(dyn_model, dataset, sample: int = 3000) -> pd.DataFrame:
     return mean_abs
 
 
-def _fig_shap_by_checkpoint(dyn_model, dataset, sample: int = 4000) -> None:
-    """Show the observed lifecycle signals activating only from their checkpoint on."""
-    test = dataset.features_test
-    cols = feature_columns(test)
-    rows = test.sample(min(sample, len(test)), random_state=config.SEED)
-    explainer = shap.TreeExplainer(dyn_model)
-    shap_values = np.abs(explainer.shap_values(rows[cols]))
-    shap_df = pd.DataFrame(shap_values, columns=cols)
-    shap_df["checkpoint_index"] = rows["checkpoint_index"].to_numpy()
-
-    tracked = [
-        ("obs_assignment_delay_min", "assignment delay"),
-        ("obs_prep_overrun_min", "prep overrun"),
-        ("obs_to_restaurant_min", "rider→restaurant"),
-        ("expected_to_customer_min", "distance prior"),
-    ]
-    by_cp = shap_df.groupby("checkpoint_index").mean(numeric_only=True)
-
-    fig, ax = plt.subplots(figsize=(7.5, 4.4))
-    x = np.arange(len(config.CHECKPOINTS))
-    for col, label in tracked:
-        ax.plot(x, [by_cp.loc[i, col] if i in by_cp.index else 0 for i in x], marker="o", label=label)
-    ax.set_xticks(x, [c.replace("_", "\n") for c in config.CHECKPOINTS])
-    ax.set_ylabel("Mean |SHAP| (min)")
-    ax.set_title("Observed signals gain influence as the order progresses")
-    ax.legend(fontsize=8)
-    fig.tight_layout()
-    fig.savefig(config.FIGURES_DIR / "shap_by_checkpoint.png")
-    plt.close(fig)
-
-
 # --------------------------------------------------------------------------- #
 # Orchestration
 # --------------------------------------------------------------------------- #
@@ -242,7 +211,6 @@ def run() -> dict:
     _fig_mae_by_checkpoint(dyn_metrics)
     _fig_overrun_by_zone(breakdown)
     shap_importance = _fig_shap_global(dyn_model, dataset)
-    _fig_shap_by_checkpoint(dyn_model, dataset)
 
     comparison = {
         "static_silent_overrun": base_metrics["silent_overrun_rate"],
