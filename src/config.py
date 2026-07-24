@@ -81,6 +81,7 @@ class DelayParams:
     # Travel speed (km per minute) before congestion multiplier
     base_speed_kmpm: float = 0.5  # ~30 km/h free-flowing
     rain_congestion_extra: float = 0.20  # added to zone congestion when raining
+    travel_noise_sigma: float = 0.22  # irreducible per-trip traffic variance (log-normal)
 
     # Pickup dwell (rider waits at restaurant), minutes
     pickup_dwell_mean: float = 3.5

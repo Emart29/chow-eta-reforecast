@@ -103,10 +103,12 @@ def simulate_lifecycle(
 
     # --- Rider travel to the restaurant -------------------------------------
     # The assigned rider's distance to the restaurant grows as nearby supply
-    # thins out. Travel time then follows the shared congestion-aware model.
+    # thins out. Travel time follows the shared congestion-aware model, with a
+    # per-trip traffic shock so travel carries irreducible uncertainty.
     scarcity = np.clip(1.0 - riders_nearby / 12.0, 0.0, 1.0)
     rider_to_restaurant_km = rng.exponential(0.8 + 2.5 * scarcity)
-    to_restaurant_min = _travel_minutes(rider_to_restaurant_km, congestion, rain)
+    to_restaurant_noise = np.exp(rng.normal(0.0, d.travel_noise_sigma, size=n))
+    to_restaurant_min = _travel_minutes(rider_to_restaurant_km, congestion, rain) * to_restaurant_noise
 
     # --- Pickup -------------------------------------------------------------
     # The order can be collected only once both the food is ready and the rider
@@ -117,7 +119,8 @@ def simulate_lifecycle(
     pickup_confirmed_min = np.maximum(food_ready_min, rider_arrival_min) + pickup_dwell_min
 
     # --- Delivery -----------------------------------------------------------
-    to_customer_min = _travel_minutes(distance_km, congestion, rain)
+    to_customer_noise = np.exp(rng.normal(0.0, d.travel_noise_sigma, size=n))
+    to_customer_min = _travel_minutes(distance_km, congestion, rain) * to_customer_noise
     delivered_min = pickup_confirmed_min + to_customer_min
     enroute_midpoint_min = pickup_confirmed_min + to_customer_min / 2.0
 
