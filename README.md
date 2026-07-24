@@ -150,7 +150,10 @@ docker run -p 8000:8000 chow-eta-reforecast
 ## Live demo
 
 - **Dashboard:** <https://chow-eta-reforecast.streamlit.app/>
-- API docs: *add your Render URL* `/docs`
+- **API docs:** <https://chow-eta-reforecast.onrender.com/docs>
+
+> Both are free-tier hosts and sleep when idle — the first request after inactivity can take up to
+> ~50 s to wake.
 
 ## Project structure
 
