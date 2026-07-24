@@ -147,6 +147,11 @@ docker build -t chow-eta-reforecast .
 docker run -p 8000:8000 chow-eta-reforecast
 ```
 
+## Live demo
+
+- Dashboard: *add your Streamlit Cloud URL*
+- API docs: *add your Render URL* `/docs`
+
 ## Project structure
 
 ```text
