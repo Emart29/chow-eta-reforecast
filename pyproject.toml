@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chow-eta-reforecast"
+version = "0.1.0"
+description = "Dynamic ETA re-forecasting engine for last-mile delivery (synthetic-data proof of concept)."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "pyarrow>=15.0",
+    "scikit-learn>=1.4",
+    "xgboost>=2.0",
+    "lightgbm>=4.3",
+    "shap>=0.44",
+    "matplotlib>=3.8",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "pydantic>=2.6",
+    "streamlit>=1.33",
+    "evidently>=0.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.4",
+]
+
+[project.scripts]
+chowdeck-simulate = "src.simulate.orders:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "api*", "dashboard*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
