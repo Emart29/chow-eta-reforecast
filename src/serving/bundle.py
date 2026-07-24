@@ -68,7 +68,7 @@ def load_bundle() -> ServingBundle:
 def main() -> None:
     # Import the module under its real name so pickled classes are tagged
     # ``src.serving.bundle`` rather than ``__main__`` when run with ``-m``.
-    from src.serving import bundle as bundle_module
+    from src.serving import bundle as bundle_module  # noqa: PLW0406 (intentional, see above)
 
     bundle = bundle_module.build_and_save()
     print("Serving bundle trained and saved.")

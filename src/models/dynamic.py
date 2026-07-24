@@ -84,8 +84,8 @@ def train(dataset: Dataset | None = None) -> tuple[XGBRegressor, dict]:
         "per_checkpoint": per_checkpoint,
         "overall": error_metrics(predicted_eta, actual_total),
         "feature_columns": columns,
-        "n_train_rows": int(len(train_rows)),
-        "n_test_rows": int(len(test_rows)),
+        "n_train_rows": len(train_rows),
+        "n_test_rows": len(test_rows),
     }
     return model, metrics
 

@@ -14,8 +14,6 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request
 
-from src import config
-from src.serving.service import ModelService, OrderStore
 from api.schemas import (
     EtaResponse,
     HealthResponse,
@@ -24,6 +22,8 @@ from api.schemas import (
     ReforecastResponse,
     RiskResponse,
 )
+from src import config
+from src.serving.service import ModelService, OrderStore
 
 logger = logging.getLogger("chow.api")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")

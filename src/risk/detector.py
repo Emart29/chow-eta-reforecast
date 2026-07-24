@@ -30,8 +30,8 @@ from xgboost import XGBClassifier
 
 from src import config
 from src.features.pipeline import feature_columns
-from src.models.dataset import Dataset, build_dataset
 from src.models import dynamic
+from src.models.dataset import Dataset, build_dataset
 
 MODEL_PATH = config.MODELS_DIR / "risk_detector.joblib"
 METRICS_PATH = config.REPORTS_DIR / "risk_metrics.json"
@@ -153,7 +153,7 @@ def train(dataset: Dataset | None = None) -> tuple[XGBClassifier, dict, pd.DataF
         "learned_model": _operating_point(y_test, model_flags),
         "learned_model_matched_budget": _operating_point(y_test, matched_flags),
         "rule_baseline": _operating_point(y_test, rule_flags),
-        "n_test": int(len(y_test)),
+        "n_test": len(y_test),
     }
     _plot_pr_curve(y_test, scores, metrics["rule_baseline"])
 

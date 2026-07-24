@@ -199,10 +199,14 @@ def _summarise(enriched: pd.DataFrame) -> str:
         f"orders:                    {len(enriched):,}",
         f"compounding-delay share:   {enriched['compounding_delay'].mean():.1%}",
         f"prep overrun vs estimate:  {prep_overrun:.1%}",
-        f"assignment delay  P50/P90/P99: {assign.quantile(0.5):.1f} / "
-        f"{assign.quantile(0.9):.1f} / {assign.quantile(0.99):.1f} min",
-        f"delivery time     P50/P90/P99: {delivery.quantile(0.5):.1f} / "
-        f"{delivery.quantile(0.9):.1f} / {delivery.quantile(0.99):.1f} min",
+        (
+            f"assignment delay  P50/P90/P99: {assign.quantile(0.5):.1f} / "
+            f"{assign.quantile(0.9):.1f} / {assign.quantile(0.99):.1f} min"
+        ),
+        (
+            f"delivery time     P50/P90/P99: {delivery.quantile(0.5):.1f} / "
+            f"{delivery.quantile(0.9):.1f} / {delivery.quantile(0.99):.1f} min"
+        ),
         f"deliveries over 60 min:    {(delivery > 60).mean():.1%}",
         f"deliveries over 90 min:    {(delivery > 90).mean():.1%}",
     ]

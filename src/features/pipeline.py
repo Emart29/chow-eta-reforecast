@@ -66,7 +66,7 @@ class FeatureBuilder:
         self._fitted = False
 
     # -- fit ----------------------------------------------------------------
-    def fit(self, orders: pd.DataFrame) -> "FeatureBuilder":
+    def fit(self, orders: pd.DataFrame) -> FeatureBuilder:
         """Learn restaurant- and zone-level history from training orders only."""
         self._global_prep = float(orders["actual_prep_min"].mean())
         self._global_delivery = float(orders["actual_delivery_min"].mean())

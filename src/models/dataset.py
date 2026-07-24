@@ -47,9 +47,19 @@ def load_simulated() -> tuple[pd.DataFrame, pd.DataFrame]:
     return orders, events
 
 
-def build_dataset(test_size: float = 0.2, seed: int = config.SEED) -> Dataset:
-    """Split orders, fit the feature pipeline on the training split, and transform both."""
-    orders, events = load_simulated()
+def build_dataset(
+    test_size: float = 0.2,
+    seed: int = config.SEED,
+    orders: pd.DataFrame | None = None,
+    events: pd.DataFrame | None = None,
+) -> Dataset:
+    """Split orders, fit the feature pipeline on the training split, and transform both.
+
+    ``orders`` and ``events`` may be supplied directly (for tests or ad-hoc runs);
+    when omitted they are read from the simulated parquet files.
+    """
+    if orders is None or events is None:
+        orders, events = load_simulated()
 
     train_ids, test_ids = _split_order_ids(orders["order_id"].to_numpy(), test_size, seed)
     train_mask = orders["order_id"].isin(train_ids)

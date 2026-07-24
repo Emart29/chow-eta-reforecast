@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src import config  # noqa: E402
+from src import config
 
 STATIC_COLOR = "#d1495b"
 DYNAMIC_COLOR = "#2a9d8f"

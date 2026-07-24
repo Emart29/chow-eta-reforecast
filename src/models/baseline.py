@@ -63,8 +63,8 @@ def train(dataset: Dataset | None = None) -> tuple[XGBRegressor, dict]:
         actual=actual,
         tolerance_min=config.SILENT_OVERRUN_THRESHOLD_MIN,
     )
-    metrics["n_train"] = int(len(train_rows))
-    metrics["n_test"] = int(len(test_rows))
+    metrics["n_train"] = len(train_rows)
+    metrics["n_test"] = len(test_rows)
     metrics["feature_columns"] = columns
     return model, metrics
 
