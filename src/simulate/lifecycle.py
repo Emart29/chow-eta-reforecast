@@ -87,7 +87,7 @@ def simulate_lifecycle(
         + np.where(compounding, d.prep_overrun_highvol_extra, 0.0)
     )
     prep_multiplier = np.exp(rng.normal(0.0, prep_sigma))
-    actual_prep_min = prep_estimate * prep_multiplier
+    actual_prep_min = np.minimum(prep_estimate * prep_multiplier, d.max_prep_min)
 
     # --- Rider assignment ---------------------------------------------------
     # Assignment delay is log-normal: usually quick, occasionally very slow.
@@ -99,7 +99,9 @@ def simulate_lifecycle(
         + (1.0 - density) * d.assign_low_density_bump
         + np.where(compounding, d.assign_peak_mu_bump, 0.0)
     )
-    assignment_delay_min = np.exp(rng.normal(assign_mu, d.assign_sigma))
+    assignment_delay_min = np.minimum(
+        np.exp(rng.normal(assign_mu, d.assign_sigma)), d.max_assignment_delay_min
+    )
 
     # --- Rider travel to the restaurant -------------------------------------
     # The assigned rider's distance to the restaurant grows as nearby supply

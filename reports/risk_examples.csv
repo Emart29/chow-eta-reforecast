@@ -1,0 +1,11 @@
+order_id,placement_eta_min,assignment_eta_min,actual_delivery_min,risk_score,suggested_message
+O0008642,29.4,106.5,110.5,0.997,Your order is running later than expected. Updated ETA: about 105 minutes.
+O0001068,34.6,105.7,108.4,0.998,Your order is running later than expected. Updated ETA: about 105 minutes.
+O0018131,26.3,93.4,91.0,0.997,Your order is running later than expected. Updated ETA: about 95 minutes.
+O0009664,36.1,100.3,100.6,0.997,Your order is running later than expected. Updated ETA: about 100 minutes.
+O0011465,38.8,102.4,98.6,0.998,Your order is running later than expected. Updated ETA: about 100 minutes.
+O0011780,30.5,93.0,98.3,0.998,Your order is running later than expected. Updated ETA: about 95 minutes.
+O0015889,49.9,112.4,111.1,0.996,Your order is running later than expected. Updated ETA: about 110 minutes.
+O0013344,53.9,114.8,162.6,0.998,Your order is running later than expected. Updated ETA: about 115 minutes.
+O0018780,64.1,123.5,121.3,0.998,Your order is running later than expected. Updated ETA: about 125 minutes.
+O0005262,38.7,97.9,95.5,0.998,Your order is running later than expected. Updated ETA: about 100 minutes.

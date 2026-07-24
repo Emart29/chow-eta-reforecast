@@ -70,6 +70,7 @@ class DelayParams:
     prep_estimate_max: float = 30.0
     prep_noise_sigma: float = 0.28  # multiplicative log-normal sigma on actual vs estimate
     prep_overrun_highvol_extra: float = 0.35  # extra sigma for high-volume restaurants
+    max_prep_min: float = 75.0  # ceiling; beyond this an order would realistically be escalated
 
     # Rider assignment delay (minutes) — log-normal(mu, sigma)
     assign_mu: float = 1.1  # ~exp(1.1) ≈ 3 min median off-peak
@@ -77,6 +78,7 @@ class DelayParams:
     assign_peak_mu_bump: float = 0.85  # added to mu during peak windows
     assign_rain_mu_bump: float = 0.45
     assign_low_density_bump: float = 0.6  # scaled by (1 - rider_density)
+    max_assignment_delay_min: float = 90.0  # ceiling; beyond this an order would be reassigned
 
     # Travel speed (km per minute) before congestion multiplier
     base_speed_kmpm: float = 0.5  # ~30 km/h free-flowing
