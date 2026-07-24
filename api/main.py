@@ -13,6 +13,7 @@ import time
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import RedirectResponse
 
 from api.schemas import (
     EtaResponse,
@@ -65,6 +66,12 @@ async def add_latency_header(request: Request, call_next):
     response.headers["X-Process-Time-Ms"] = f"{elapsed_ms:.2f}"
     logger.info("%s %s -> %s (%.2f ms)", request.method, request.url.path, response.status_code, elapsed_ms)
     return response
+
+
+@app.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    """Send visitors of the base URL to the interactive API docs."""
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/health", response_model=HealthResponse)
